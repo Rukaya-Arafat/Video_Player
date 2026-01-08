@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import ErrorBox from "./ErrorBox";
 import LanguagePicker from "./LanguagePicker";
 import VideoPlayer from "./VideoPlayer";
+import VideoDescription from "./VideoDescription";
 
 export default function PlayerPanel({ loading, err, selected, lang, setLang }) {
   const availableLangs = useMemo(() => {
@@ -46,12 +47,17 @@ export default function PlayerPanel({ loading, err, selected, lang, setLang }) {
         onChange={setLang}
       />
 
+   
       <VideoPlayer
-        videoKey={`${selected.id}-${lang}`}
-        videoUrl={selected.video_url}
-        subtitleUrl={subtitleUrl}
-        lang={lang}
-      />
+  videoKey={selected.id}     // ✅ يتغير فقط عند تغيير الفيديو
+  videoUrl={selected.video_url}
+  subtitleUrl={subtitleUrl}  // يتغير عند تغيير اللغة
+  lang={lang}
+/>
+
+
+<VideoDescription text={selected.description} />
+
     </>
   );
 }
