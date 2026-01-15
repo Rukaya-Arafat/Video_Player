@@ -2,26 +2,21 @@
    Autumn Theme – Global
 ========================= */
 :root {
-  /* Backgrounds */
   --bg: #f7f2ea;
   --text: #3b2f2a;
   --muted: rgba(59, 47, 42, .65);
 
-  /* Borders */
   --border: #e0d4c3;
   --border-strong: #8b5e34;
   --danger-border: #c97c5d;
 
-  /* Accent */
   --accent: #c75b12;
   --accent-soft: #e8b07a;
 
-  /* Radius */
   --radius-lg: 14px;
   --radius-md: 12px;
   --radius-sm: 10px;
 
-  /* Shadow */
   --shadow: 0 8px 24px rgba(139, 94, 52, .15);
 }
 
@@ -40,7 +35,7 @@ body {
 }
 
 /* =========================
-   App Shell (Navbar + Sidebar like YouTube)
+   App Shell + Navbar
 ========================= */
 .shell { min-height: 100vh; }
 
@@ -49,7 +44,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-
   padding: 0 14px;
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -93,7 +87,9 @@ body {
   color: var(--text);
 }
 
-/* Body: sidebar + content */
+/* =========================
+   Body: Sidebar + Content
+========================= */
 .body {
   display: flex;
   min-height: calc(100vh - 56px);
@@ -126,7 +122,6 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-
   padding: 10px 12px;
   border-radius: 12px;
   border: 0;
@@ -143,10 +138,19 @@ body {
   outline: 2px solid var(--border-strong);
 }
 
-.sideItem__icon { width: 26px; display: flex; justify-content: center; font-size: 18px; }
-.sideItem__label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sideItem__icon {
+  width: 26px;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
 
-/* Desktop/Mobile containers */
+.sideItem__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sidebarDesktop { display: block; position: sticky; top: 56px; }
 .sidebarMobileDrawer { display: none; }
 
@@ -163,13 +167,12 @@ body {
 .backdrop--show { opacity: 1; pointer-events: auto; }
 
 /* =========================
-   Main App Content Layout
-   (Player + Playlist)
+   Main Layout (Player + Playlist)
 ========================= */
 .app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0; /* خلي padding من .content */
+  padding: 0;
 }
 
 .app__title {
@@ -181,7 +184,7 @@ body {
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: minmax(0, 1fr) 320px;
   gap: 16px;
   align-items: start;
 }
@@ -226,17 +229,15 @@ body {
 }
 
 /* =========================
-   Video Player (single definition)
+   Video Player
 ========================= */
 .video {
   width: 100%;
   max-width: 720px;
   aspect-ratio: 16 / 9;
   height: auto;
-
   margin: 0 auto;
   display: block;
-
   border-radius: var(--radius-md);
   background: #000;
   box-shadow: var(--shadow);
@@ -249,7 +250,7 @@ body {
 }
 
 /* =========================
-   Playlist (videos only)
+   Playlist (videos only) + Duration
 ========================= */
 .playlist {
   border-left: 1px solid var(--border);
@@ -261,29 +262,148 @@ body {
   gap: 12px;
 }
 
-/* Button wrapper */
 .playlistItem--videoOnly {
+  width: 100%;
+  text-align: left;
   padding: 0;
-  border: none;
+  border: 0;
   background: transparent;
   cursor: pointer;
 }
 
-/* Preview video */
+.playlistThumb {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+}
+
 .playlistVideo {
-  width: 100%;
-  max-width: 260px;
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: 12px;
   background: #000;
-  display: block;
-  object-fit: cover;
   box-shadow: var(--shadow);
   border: 2px solid transparent;
 }
 
 .playlistItem--active .playlistVideo { border-color: var(--border-strong); }
 .playlistItem--videoOnly:hover .playlistVideo { border-color: var(--accent); }
+
+.playlistDuration {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: rgba(0,0,0,.85);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* =========================
+   Recommended Videos Grid under Player
+========================= */
+.belowGrid { margin-top: 16px; }
+
+.belowGrid__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.belowGrid__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.videoGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.videoCard {
+  border: 1px solid var(--border, #e5e5e5);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.videoCard:hover { background: rgba(139, 94, 52, .06); }
+
+.videoCard__thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.videoCard__thumb img,
+.videoCard__thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.videoCard__body { padding: 10px; }
+
+.videoCard__title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text, #0f0f0f);
+}
+
+.videoCard__meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted, #606060);
+}
+
+/* =========================
+   Video Description
+========================= */
+.videoDesc {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f9f9f9;
+  border: 1px solid var(--border, #e5e5e5);
+}
+
+.videoDesc__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text, #0f0f0f);
+  max-height: 4.8em;
+  overflow: hidden;
+}
+
+.videoDesc__text.open { max-height: none; }
+
+.videoDesc__toggle {
+  margin-top: 6px;
+  border: none;
+  background: none;
+  color: #ff0000;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
 
 /* =========================
    Error Box + Utilities
@@ -300,11 +420,15 @@ body {
 .muted { font-size: 12px; opacity: .7; }
 
 /* =========================
-   Responsive (Mobile)
+   Responsive
 ========================= */
+@media (max-width: 1100px) {
+  .videoGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 900px) {
-  /* Sidebar becomes drawer */
   .sidebarDesktop { display: none; }
+
   .sidebarMobileDrawer {
     display: block;
     position: fixed;
@@ -313,23 +437,20 @@ body {
     height: calc(100vh - 56px);
     width: 82vw;
     max-width: 320px;
+    background: var(--bg);
     transform: translateX(-105%);
     transition: transform .22s ease;
     z-index: 70;
     box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    overflow-y: auto;
   }
+
   .sidebarMobileDrawer.isOpen { transform: translateX(0); }
 
-  /* Content padding smaller */
   .content { padding: 10px; }
-
-  /* Search shrinks */
   .search { width: 55vw; max-width: 55vw; }
 
-  /* Main layout becomes vertical (video then playlist) */
-  .layout {
-    grid-template-columns: 1fr;
-  }
+  .layout { grid-template-columns: 1fr; }
 
   .playlist {
     border-left: 0;
@@ -338,163 +459,12 @@ body {
     padding-top: 12px;
   }
 
-  .playlistVideo { max-width: 100%; }
-}/* زر عنصر القائمة */
-/* ===== FIX: duration always inside video ===== */
+  .playlistThumb { width: 100%; display: block; }
+  .playlistVideo { width: 100%; }
 
-/* الزر لا يمدد المحتوى */
-.playlistItem--videoOnly{
-  width: 100%;
-  text-align: left;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  .videoGrid { grid-template-columns: 1fr; }
 }
 
-/* الحاوية = نفس حجم الفيديو (لا تتمدد) */
-.playlistThumb{
-  position: relative;
-  display: inline-block;     /* يمنع تمدد الحاوية */
-  width: fit-content;        /* الحاوية على قد المحتوى */
-  max-width: 100%;
-}
-
-/* الفيديو لازم يكون block + بدون max-width */
-.playlistVideo{
-  display: block;
-  width: 260px;              /* حجم ثابت لثمنيل اليمين (عدله إذا بدك) */
-  max-width: 100%;           /* يسمح بالتصغير بالموبايل */
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 12px;
-  background: #000;
-}
-
-/* الوقت داخل الفيديو دائمًا */
-.playlistDuration{
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  background: rgba(0,0,0,.85);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* موبايل: الثمنيل يصير بعرض كامل */
-@media (max-width: 900px){
-  .playlistThumb{ width: 100%; display: block; }
-  .playlistVideo{ width: 100%; }
-}
-/* ===== Videos Grid under the player ===== */
-.belowGrid{
-  margin-top: 16px;
-}
-
-.belowGrid__head{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.belowGrid__title{
-  margin: 0;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.videoGrid{
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.videoCard{
-  border: 1px solid var(--border, #e5e5e5);
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
-  padding: 0;
-  cursor: pointer;
-  text-align: left;
-}
-
-.videoCard:hover{
-  background: var(--hover, #f2f2f2);
-}
-
-.videoCard__thumb{
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-}
-
-.videoCard__thumb img,
-.videoCard__thumb video{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.videoCard__body{
-  padding: 10px;
-}
-
-.videoCard__title{
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--text, #0f0f0f);
-}
-
-.videoCard__meta{
-  margin-top: 4px;
-  font-size: 12px;
-  color: var(--muted, #606060);
-}
-
-/* Responsive */
-@media (max-width: 1100px){
-  .videoGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 650px){
-  .videoGrid{ grid-template-columns: 1fr; }
-}
-.videoDesc{
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: #f9f9f9;
-  border: 1px solid var(--border, #e5e5e5);
-}
-
-.videoDesc__text{
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text, #0f0f0f);
-
-  max-height: 4.8em; /* ~3 أسطر */
-  overflow: hidden;
-}
-
-.videoDesc__text.open{
-  max-height: none;
-}
-
-.videoDesc__toggle{
-  margin-top: 6px;
-  border: none;
-  background: none;
-  color: #ff0000;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
+@media (max-width: 650px) {
+  .videoGrid { grid-template-columns: 1fr; }
 }

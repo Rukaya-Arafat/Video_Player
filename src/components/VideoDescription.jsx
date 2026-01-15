@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function VideoDescription({ text }) {
   const [open, setOpen] = useState(false);
 
-  if (text == null) return null; // أو اعرض "لا يوجد وصف" إذا تحب
+  if (text == null) return null; 
   const str = String(text);
   const canToggle = str.length > 180;
 

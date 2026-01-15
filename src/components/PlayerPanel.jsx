@@ -49,12 +49,11 @@ export default function PlayerPanel({ loading, err, selected, lang, setLang }) {
 
    
       <VideoPlayer
-  videoKey={selected.id}     // ✅ يتغير فقط عند تغيير الفيديو
+  videoKey={selected.id}    
   videoUrl={selected.video_url}
-  subtitleUrl={subtitleUrl}  // يتغير عند تغيير اللغة
+  subtitleUrl={subtitleUrl}  
   lang={lang}
 />
-
 
 <VideoDescription text={selected.description} />
 

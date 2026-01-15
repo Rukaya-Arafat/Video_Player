@@ -1,41 +1,41 @@
-import { useEffect, useRef } from "react"; // Hooks للتحكم بعنصر الفيديو وقت تغيير الترجمة
+import { useEffect, useRef } from "react";
 
 export default function VideoPlayer({ videoUrl, subtitleUrl, lang, videoKey }) {
-  const videoRef = useRef(null); // مرجع لعنصر الفيديو
+  const videoRef = useRef(null);
 
-  useEffect(() => { // هذا التأثير خاص بتبديل الترجمة بدون ما نخسر وقت الفيديو
-    const video = videoRef.current; // نجيب عنصر الفيديو
-    if (!video) return; // حماية إذا لم يتوفر العنصر بعد
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
 
-    const wasPlaying = !video.paused; // هل كان الفيديو شغال؟
-    const t = video.currentTime || 0; // نخزن الوقت الحالي قبل تغيير الترجمة
+    const wasPlaying = !video.paused;
+    const t = video.currentTime || 0;
 
-    video.load(); // نطلب من المتصفح إعادة تحميل المسارات (track)
-    video.currentTime = t; // نرجع لنفس الوقت
+    video.load();
+    video.currentTime = t;
 
-    if (wasPlaying) { // إذا كان شغال، نخليه يكمل
-      video.play().catch(() => {}); // نتجاهل أي منع تشغيل تلقائي
+    if (wasPlaying) {
+      video.play().catch(() => {});
     }
-  }, [subtitleUrl]); // يتنفذ فقط عند تغيير ملف الترجمة
+  }, [subtitleUrl]);
 
   return (
     <video
-      key={videoKey}              // ✅ يتغير فقط عند تغيير الفيديو => يبدأ من البداية
-      ref={videoRef}              // ربط ref بعنصر الفيديو
-      controls                    // أزرار التحكم
-      crossOrigin="anonymous"     // مهم للترجمة من روابط خارجية
-      playsInline                 // مهم للموبايل
-      className="video"           // ستايل
+      key={videoKey}
+      ref={videoRef}
+      controls
+      crossOrigin="anonymous"
+      playsInline
+      className="video"
     >
-      <source src={videoUrl} type="video/mp4" /> {/* مصدر الفيديو */}
+      <source src={videoUrl} type="video/mp4" />
 
-      {subtitleUrl ? ( // إذا يوجد ترجمة
+      {subtitleUrl ? (
         <track
-          src={subtitleUrl}        // رابط ملف الترجمة
-          kind="subtitles"         // نوع المسار ترجمة
-          srcLang={lang}           // كود اللغة
-          label={lang.toUpperCase()} // اسم يظهر في قائمة الترجمة
-          default                 // افتراضي
+          src={subtitleUrl}
+          kind="subtitles"
+          srcLang={lang}
+          label={lang.toUpperCase()}
+          default
         />
       ) : null}
     </video>

@@ -5,7 +5,7 @@ export default function ErrorBox({ message }) {
     <div className="errorBox">
       <b>خطأ:</b> {message}
       <div className="errorBox__hint">
-        تأكدي من Policy القراءة العامة + اسم الجدول videos + مفاتيح .env
+        حاول تحديث الصفحة أو العودة لاحقًا.
       </div>
     </div>
   );

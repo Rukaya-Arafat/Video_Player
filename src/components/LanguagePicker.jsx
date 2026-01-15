@@ -1,7 +1,3 @@
-// LanguagePicker.jsx
-// هذا الكومبونينت يعرض أزرار اختيار اللغة للترجمة بناءً على اللغات المتاحة للفيديو الحالي.
-// - إذا لم توجد لغات متاحة: نعرض رسالة "لا توجد ترجمة"
-// - عند الضغط على زر: نستدعي onChange ونمرّر كود اللغة (مثل: "ar", "en", "tr")
 
 export default function LanguagePicker({ availableLangs, lang, onChange }) {
   // لو ما في أي ترجمات متاحة للفيديو
@@ -17,13 +13,13 @@ export default function LanguagePicker({ availableLangs, lang, onChange }) {
 
         return (
           <button
-            key={l.code} // مفتاح فريد لكل لغة
-            type="button" // مهم عشان ما يعمل submit لو داخل form
-            onClick={() => onChange(l.code)} // تغيير اللغة عند الضغط
-            className={`btn ${isActive ? "btn--active" : ""}`} // تمييز الزر النشط
-            aria-pressed={isActive} // تحسين الوصولية: هل الزر "مفعل"؟
-            disabled={isActive} // اختياري: يمنع الضغط على نفس اللغة المختارة
-            title={isActive ? "هذه هي اللغة الحالية" : `اختر ${l.label}`} // تلميح بسيط
+            key={l.code} 
+            type="button" 
+            onClick={() => onChange(l.code)} 
+            className={`btn ${isActive ? "btn--active" : ""}`} 
+            aria-pressed={isActive} 
+            disabled={isActive} 
+            title={isActive ? "هذه هي اللغة الحالية" : `اختر ${l.label}`} 
           >
             {l.label}
           </button>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 function formatDuration(seconds = 0) {
   if (!seconds || isNaN(seconds)) return "";
   const total = Math.floor(seconds);
@@ -17,7 +16,7 @@ export default function PlaylistPanel({ videos = [], selected, onSelect }) {
         {videos.map((v, index) => (
           <button
             key={v.id ?? index}
-            onClick={() => onSelect(v)}   // ✅ فقط اختيار الفيديو
+            onClick={() => onSelect(v)}   
             className={`playlistItem playlistItem--videoOnly ${
               selected?.id === v.id ? "playlistItem--active" : ""
             }`}

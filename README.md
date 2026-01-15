@@ -1,16 +1,28 @@
-# React + Vite
+# 🎬 Video Player App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+تم تنفيذ هذا المشروع من قبل الطالبات:
+رقية عرفات، بنان درويش، أمامة بيرقدار، خلود خليل.
 
-Currently, two official plugins are available:
+هذا المشروع عبارة عن تطبيق مشغل فيديو يقوم بمزامنة الترجمة مع الصوت بحيث يتم عرض نص الترجمة في الوقت المناسب أثناء تشغيل الفيديو بالاعتماد على وقت التشغيل.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+يسمح التطبيق بتشغيل الفيديو والتحكم به.
 
-## React Compiler
+يدعم التطبيق عرض الترجمة المتزامنة مع الصوت.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+يتيح التطبيق تغيير لغة الترجمة حسب اختيار المستخدم.
 
-## Expanding the ESLint configuration
+يمكن للمستخدم تصفح قوائم الفيديوهات داخل التطبيق.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+تم إنشاء ترجمة خاصة لكل فيديو على حدة، ولكل فيديو ملفات ترجمة مخصصة حسب اللغة ويتم تخزينها داخل مجلد public/locale.
+
+تم استخدام إطار العمل React لبناء واجهة المستخدم.
+
+تم استخدام Vite كأداة لبناء وتشغيل المشروع بسرعة.
+
+تم استخدام JavaScript لكتابة منطق التطبيق.
+
+تم استخدام Supabase لإدارة البيانات والتخزين.
+
+تم استخدام CSS لتنسيق واجهة المستخدم.
+
+تم تقسيم الكود إلى مكونات واستخدام  Hook لجلب بيانات الفيديوهات وتنظيم حالتها داخل التطبيق.
